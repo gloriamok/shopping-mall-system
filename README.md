@@ -1,6 +1,7 @@
 ## shopping-mall-system
 
 ## 주제: 스프링 프레임워크를 사용한 쇼핑몰 사이트 구현
+2022.06
 
 ## 1. 구현 내용
 **1) 대문 페이지**
@@ -145,74 +146,79 @@
 **0) 구현에 쓰인 파일들**<br>
 ![image](images/51.png)
 ![image](images/52.png)<br>
-   
+
 **1) 뷰 인터페이스: HTML기반 웹 페이지에 표시**<br>
-(1)	JSP 기반으로 스프링 MVC를 사용하여 구현하였다.
-(2)	상품 설명 페이지에 이미지를 사용하고 상품 설명을 깔끔하게 보이게 하기 위해 중간정렬해주었다.
-  
-(3)	Div 태그를 사용해 웹페이지 레이아웃을 정리해주었다.
- 
+(1)	JSP 기반으로 스프링 MVC를 사용하여 구현하였다.<br>
+(2)	상품 설명 페이지에 이미지를 사용하고 상품 설명을 깔끔하게 보이게 하기 위해 중간정렬해주었다.<br>
+![image](images/53.png)<br>
+(3)	Div 태그를 사용해 웹페이지 레이아웃을 정리해주었다.<br>
+![image](images/54.png)
+![image](images/55.png)<br>
  
 **2) 모델 구현**<br>
 (1)	자바 코드 내에 임의로 내부 데이터 구조를 정의해서 사용하였다.
-o	homecontroller에서 productList, orderList, userList를 사용하였다.
-o	productList는 상품리스트로 상품들의 정보를 저장하였다.
-	상품 정보는 제품번호, 제품명, 가격, 사이즈, 제품설명이다.
-	homecontroller에서 상품리스트에 5개의 상품을 저장하였다.
-o	orderList는 주문리스트로 주문정보들을 저장하였다.
-	주문번호, 주문한 회원아이디, 제품명, 가격, 주문날짜
-o	userList는 사용자리스트로 회원정보들을 저장하였다.
-	아이디, 암호, 이름, 생년월일, 이메일, 주소, 전화번호
- 
+-	homecontroller에서 productList, orderList, userList를 사용하였다.
+-	productList는 상품리스트로 상품들의 정보를 저장하였다.<br>
+  o	상품 정보는 제품번호, 제품명, 가격, 사이즈, 제품설명이다.<br>
+  o	homecontroller에서 상품리스트에 5개의 상품을 저장하였다.
+-	orderList는 주문리스트로 주문정보들을 저장하였다.<br>
+  o	주문번호, 주문한 회원아이디, 제품명, 가격, 주문날짜
+-	userList는 사용자리스트로 회원정보들을 저장하였다.<br>
+  o	아이디, 암호, 이름, 생년월일, 이메일, 주소, 전화번호
+![image](images/56.png)<br>
 
 **3) 콘트롤러 구현**<br>
 (1)	요청 매핑
 -	RequestMapping을 사용하여 jsp의 입력값을 요청하고 입력 내용을 받았다.
- 
+![image](images/57.png)<br>
 
 (2)	커맨드 객체 검증 및 에러 처리
--	커맨드 객체 검증 기능을 하는 UserInfoValidator 클래스와 @Valid 애노테이션을 사용하여 입력값을 검증하였다.
-o	커맨드 객체 기능을 하는 UserInfoValidator 클래스
- 
-o	HomeController에서 UserInfoValidator 사용
- 
-o	@Valid 사용 위해 UserInfo, OrderPeriod 클래스의 멤버변수에 애노테이션 추가
- 
- 
-o	@Valid 애노테이션 사용
- 
- 
--	If문과 메시지 프로퍼티를 사용해 에러를 처리하였다.
-o	Ex. 중복 이메일, 전화번호라면 에러메세지 전달
- 
-
+-	커맨드 객체 검증 기능을 하는 UserInfoValidator 클래스와 @Valid 애노테이션을 사용하여 입력값을 검증하였다.<br>
+  o	커맨드 객체 기능을 하는 UserInfoValidator 클래스<br>
+  ![image](images/58.png)<br>
+  o	HomeController에서 UserInfoValidator 사용<br>
+  ![image](images/59.png)<br>
+  o	@Valid 사용 위해 UserInfo, OrderPeriod 클래스의 멤버변수에 애노테이션 추가<br>
+  ![image](images/60.png)
+  ![image](images/61.png)<br>
+  o	@Valid 애노테이션 사용<br>
+  ![image](images/62.png)
+  ![image](images/63.png)<br>
+  
+-	If문과 메시지 프로퍼티를 사용해 에러를 처리하였다.<br>
+  o	Ex. 중복 이메일, 전화번호라면 에러메세지 전달<br>
+  ![image](images/64.png)<br>
 
 (3)	리다이렉트
 -	@postMapping 애노테이션이 있는 매서드에 대한 redirect를 구현하였다.
-   
+![image](images/65.png)
+![image](images/66.png)<br>
 -	로그인 하지 않았을 때 해당 링크로 들어갈 수 없게 redirect를 구현하였다.
- 
- 
+![image](images/67.png)
+![image](images/68.png)<br>
 
 (4)	폼 태그
--	Form 태그를 사용해 jsp에서 입력한 값을 컨트롤러로 보내주었다.
-o	Ex. Modifyuserinfo.jsp에서 form 태그를 사용해 입력값을 userInfo의 멤버변수로 입력하여 컨트롤러의 submituserinfo로 보내줌
+-	Form 태그를 사용해 jsp에서 입력한 값을 컨트롤러로 보내주었다.<br>
+  o	Ex. Modifyuserinfo.jsp에서 form 태그를 사용해 입력값을 userInfo의 멤버변수로 입력하여 컨트롤러의 submituserinfo로 보내줌<br>
+  ![image](images/69.png)<br>
  
 (5)	메시지 프로퍼티
 -	Label_ko.properties를 사용해 jsp에서 메시지를 레이블을 사용해 전달하였다.
- 
- 
--	Ex. 로그인 완료 메시지 전달
- 
+![image](images/70.png)<br>
+![image](images/71.png)<br>
+-	Ex. 로그인 완료 메시지 전달<br>
+![image](images/72.png)<br>
+![image](images/73.png)<br>
  
 (6)	날짜 변환
--	사용자 정의 태그를 사용해 yyyy-MM-dd 패턴으로 날짜를 변환해준다. 
-o	Userinfo.jsp에서 사용자 정의 태그 파일 사용해 날짜 변환
- 
- 
-  
+-	사용자 정의 태그를 사용해 yyyy-MM-dd 패턴으로 날짜를 변환해준다.<br> 
+  o	Userinfo.jsp에서 사용자 정의 태그 파일 사용해 날짜 변환<br>
+  ![image](images/74.png)<br>
+  ![image](images/75.png)<br>
+  ![image](images/76.png)
+  ![image](images/77.png)<br>  
 
 (7)	@PathVariable
--	@PathVariable 애노테이션을 사용해 로그인한 사용자에 따라 회원정보조회와 구매이력조회 시 경로를 다르게 함
- 
- 
+-	@PathVariable 애노테이션을 사용해 로그인한 사용자에 따라 회원정보조회와 구매이력조회 시 경로를 다르게 한다.<br>
+![image](images/78.png)<br>
+![image](images/79.png)<br>
